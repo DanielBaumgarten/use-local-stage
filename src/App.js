@@ -3,19 +3,21 @@ import { useLocalStorage } from 'react-use';
 
 function App() {
 
-  const [value, setValue, remove] = useLocalStorage('my-key', {"name": 'Daniel', "age": 30 });
-  const [value2, setValue2, remove2] = useLocalStorage('my-key-2', 'valor incial-daniel-lopes');
-  const [value3, setValue3, remove3] = useLocalStorage('my-key-3', 'valor-inicial-3', {
-    raw: true
-  })
+  const [value, setValue, remove] = useLocalStorage('user', {"name": 'Daniel', "age": 30 });
+  localStorage.setItem('user2', JSON.stringify({"name": 'Daniel', "age": 30}));
   return (
     <div className="App">
-        <h1>Hello World</h1>
       <div>        
+        <h1>UseLocalStorage</h1>
         <div> Value: {value.name}</div>
-        <button onClick={() => setValue('bar')}>bar</button>
-        <button onClick={() => setValue('baz')}>baz</button>
+        <button onClick={() => setValue({name: 'Joao', age: 50})}>bar</button>
         <button onClick={() => remove()}>Remove</button>
+      </div>
+      <div>
+        <h1>localStorage</h1>
+        <div> Value: {JSON.parse(localStorage.getItem('user2')).name}</div>
+        <button onClick={() => localStorage('user2','novoValor')}>bar</button>
+        <button onClick={() => localStorage.removeItem('user2')}>Remove</button>
       </div>
     </div>
   );
